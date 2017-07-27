@@ -18,7 +18,9 @@ struct IssueTracker {
     func trackIssues(for repositoryName: Observable<String>) -> Observable<[Issue]> {
         return repositoryName
             .observeOn(MainScheduler.instance)
-            .flatMapLatest { name -> Observable<Repository?> in
+            .flatMapLatest { (name: String) -> Observable<Repository?> in
+                if name == "" { return Observable.just(nil) }
+                
                 print("Repo Name: \(name)")
                 return self.findRepository(named: name)
             }

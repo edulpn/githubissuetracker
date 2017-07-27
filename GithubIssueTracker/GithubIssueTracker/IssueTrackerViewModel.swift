@@ -12,12 +12,16 @@ import RxSwift
 import RxCocoa
 
 protocol IssueTrackerViewModel {
-    func fetchIssues(for repositoryName: Observable<String>) -> Driver<[Issue]>
+    func fetchIssues(for repositoryName: Observable<String>) -> Driver<[String]>
 }
 
 class IssueTrackerViewModelImpl: IssueTrackerViewModel {
+    private var issues: [Issue] = []
     
-    func fetchIssues(for repositoryName: Observable<String>) -> Driver<[Issue]> {
-        return IssueTracker().trackIssues(for: repositoryName).asDriver(onErrorJustReturn: [])
+    func fetchIssues(for repositoryName: Observable<String>) -> Driver<[String]> {
+        return IssueTracker().trackIssues(for: repositoryName).flatMap { (issues: [Issue]) -> Observable<[String]> in
+            self.issues = issues
+            return Observable.just(issues.map { $0.title })
+        }.asDriver(onErrorJustReturn: [])
     }
 }

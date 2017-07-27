@@ -12,13 +12,7 @@ class IssueTableViewCell: UITableViewCell {
 
     @IBOutlet weak var issueLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func configure(with title: String) {
+        issueLabel.text = title
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    func configure
 }

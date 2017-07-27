@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		070D82B3C238D247ECC4C255 /* Pods_GithubIssueTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546BF950DDD32DAAE00E6870 /* Pods_GithubIssueTrackerUITests.framework */; };
 		40074F1BC7599D3106371FAA /* Pods_GithubIssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5B2D05D7C52E679E0A7F945 /* Pods_GithubIssueTracker.framework */; };
+		5B59CEA41F2A78DA000E2438 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B59CEA31F2A78DA000E2438 /* R.generated.swift */; };
 		5B5D2FFA1F21423900F19945 /* IssueTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D2FF91F21423900F19945 /* IssueTrackerViewController.swift */; };
 		5B5D2FFF1F2144FF00F19945 /* IssueTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D2FFE1F2144FF00F19945 /* IssueTrackerViewModel.swift */; };
 		5B5D30021F21480300F19945 /* Github.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5D30011F21480300F19945 /* Github.swift */; };
@@ -49,6 +50,7 @@
 		35159FF70990D7B28950C8FA /* Pods-GithubIssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubIssueTrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GithubIssueTrackerTests/Pods-GithubIssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		3D4B50472D30C379706D8ED6 /* Pods-GithubIssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubIssueTrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GithubIssueTrackerTests/Pods-GithubIssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		546BF950DDD32DAAE00E6870 /* Pods_GithubIssueTrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubIssueTrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B59CEA31F2A78DA000E2438 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		5B5D2FF91F21423900F19945 /* IssueTrackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTrackerViewController.swift; sourceTree = "<group>"; };
 		5B5D2FFE1F2144FF00F19945 /* IssueTrackerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTrackerViewModel.swift; sourceTree = "<group>"; };
 		5B5D30011F21480300F19945 /* Github.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Github.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		5B5D30031F21492D00F19945 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5B59CEA31F2A78DA000E2438 /* R.generated.swift */,
 				5B5D30041F21495500F19945 /* String+EscapedURL.swift */,
 			);
 			name = Common;
@@ -229,6 +232,7 @@
 			buildConfigurationList = 5B5F81811F2009C500243036 /* Build configuration list for PBXNativeTarget "GithubIssueTracker" */;
 			buildPhases = (
 				C7F64F13F4DB43FD67C276FA /* [CP] Check Pods Manifest.lock */,
+				5B59CEA21F2A781C000E2438 /* ShellScript */,
 				5B5F81551F2009C500243036 /* Sources */,
 				5B5F81561F2009C500243036 /* Frameworks */,
 				5B5F81571F2009C500243036 /* Resources */,
@@ -451,6 +455,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GithubIssueTrackerTests/Pods-GithubIssueTrackerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5B59CEA21F2A781C000E2438 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
 		C7F64F13F4DB43FD67C276FA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -510,6 +527,7 @@
 				5B5F815D1F2009C500243036 /* AppDelegate.swift in Sources */,
 				5B5D30051F21495500F19945 /* String+EscapedURL.swift in Sources */,
 				5B5D30021F21480300F19945 /* Github.swift in Sources */,
+				5B59CEA41F2A78DA000E2438 /* R.generated.swift in Sources */,
 				5B5D2FFA1F21423900F19945 /* IssueTrackerViewController.swift in Sources */,
 				5B7478EB1F227E8000BA734E /* Repository.swift in Sources */,
 			);

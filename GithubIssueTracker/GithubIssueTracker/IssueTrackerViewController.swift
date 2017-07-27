@@ -10,11 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-protocol IssueTrackerView {
-    var searchBar: UISearchBar! {get set}
-}
-
-class IssueTrackerViewController: UIViewController, IssueTrackerView {
+class IssueTrackerViewController: UIViewController {
 
     //ViewModel Reference
     var viewModel: IssueTrackerViewModel = IssueTrackerViewModelImpl()
@@ -25,50 +21,27 @@ class IssueTrackerViewController: UIViewController, IssueTrackerView {
     @IBOutlet weak var tableView: UITableView!
     
     //Rx
-    var searchBarTextObservable: Observable<String> {
-        return searchBar.rx.text.orEmpty.debounce(0.5, scheduler: MainScheduler.instance).distinctUntilChanged()
+    var searchBarText: Observable<String> {
+        return searchBar.rx.text.orEmpty.throttle(3.0, scheduler: MainScheduler.instance)
     }
     var disposeBag = DisposeBag()
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
+        tableView.register(R.nib.issueTableViewCell)
         
         setupRx()
     }
     
     func setupRx() {
+        let issues = viewModel.fetchIssues(for: searchBarText)
         
+        issues.drive(tableView.rx.items) { table, row, issueTitle in
+            let cell = table.dequeueReusableCell(withIdentifier: R.reuseIdentifier.issueTableViewCellIdentifier)!
+            cell.configure(with: issueTitle)
+            return cell
+        }.addDisposableTo(disposeBag)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - TableView Delegates
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
