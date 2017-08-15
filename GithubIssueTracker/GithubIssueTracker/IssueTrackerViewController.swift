@@ -13,35 +13,63 @@ import RxSwift
 class IssueTrackerViewController: UIViewController {
 
     //ViewModel Reference
-    var viewModel: IssueTrackerViewModel = IssueTrackerViewModelImpl()
+    var viewModel: IssueTrackerViewModelType?
     
     //Outlets
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    //Rx
+    //Rx observable for search bar text reacting
     var searchBarText: Observable<String> {
-        return searchBar.rx.text.orEmpty.throttle(3.0, scheduler: MainScheduler.instance)
+        return searchBar
+            .rx.text
+            .orEmpty
+            .debounce(0.5, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
     }
+    //Rx dispose bag, for cleaning up
     var disposeBag = DisposeBag()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Table view cell registration
         tableView.register(R.nib.issueTableViewCell)
         
         setupRx()
+        setupTableView()
     }
     
     func setupRx() {
-        let issues = viewModel.fetchIssues(for: searchBarText)
+        //ViewModel Instantiation + Dependency Injection
+        viewModel = IssueTrackerViewModel(with: searchBarText)
         
-        issues.drive(tableView.rx.items) { table, row, issueTitle in
+        //Rx bindings for table view and
+        viewModel?.issues.drive(tableView.rx.items) { table, row, issue in
             let cell = table.dequeueReusableCell(withIdentifier: R.reuseIdentifier.issueTableViewCellIdentifier)!
-            cell.configure(with: issueTitle)
+            cell.configure(with: issue.cellText)
             return cell
-        }.addDisposableTo(disposeBag)
+        }
+            .addDisposableTo(disposeBag)
+        
+        viewModel?.isLoading.map({ isLoading -> Bool in
+            let isHidden = !isLoading
+            return isHidden
+        })
+            .drive(loadingView.rx.isHidden)
+            .addDisposableTo(disposeBag)
+        
+        viewModel?.isLoading
+            .drive(UIApplication.shared.rx.isNetworkActivityIndicatorVisible)
+            .addDisposableTo(disposeBag)
+    }
+    
+    func setupTableView() {
+        tableView.rx.itemSelected.asObservable().subscribe(onNext: { indexPath in
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        })
+        .addDisposableTo(disposeBag)
     }
 }

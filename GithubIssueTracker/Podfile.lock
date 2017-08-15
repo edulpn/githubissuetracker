@@ -26,17 +26,16 @@ PODS:
     - RxCocoa
     - RxSwift
   - RxSwift (3.6.0)
-  - Swinject (2.0.0)
-  - SwinjectStoryboard (1.0.0):
-    - Swinject (= 2.0.0)
+  - RxSwiftUtilities (1.0.1):
+    - RxCocoa (~> 3.0)
+    - RxSwift (~> 3.0)
 
 DEPENDENCIES:
   - Moya-ModelMapper/RxSwift (~> 4.0.0)
   - R.swift
   - RxCocoa (~> 3.0.0)
   - RxOptional
-  - Swinject (= 2.0.0)
-  - SwinjectStoryboard (= 1.0.0)
+  - RxSwiftUtilities
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -49,9 +48,8 @@ SPEC CHECKSUMS:
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxSwift: a0925c7fb11fbe60055285f6f2062241aa37a175
-  Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
-  SwinjectStoryboard: 8e0d3c0202b64172bdf915d55e8dc83d9c4e7863
+  RxSwiftUtilities: 57e77c17b885931c37aa038f114f14fd1f478ac2
 
-PODFILE CHECKSUM: c883100e393c0b8fed087db8d858f33ccb51aa06
+PODFILE CHECKSUM: 667a3e19de0265a3b1537776f0f71e896544a357
 
 COCOAPODS: 1.2.1

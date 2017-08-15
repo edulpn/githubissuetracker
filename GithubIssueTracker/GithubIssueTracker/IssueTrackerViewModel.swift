@@ -11,17 +11,24 @@ import Moya
 import RxSwift
 import RxCocoa
 
-protocol IssueTrackerViewModel {
-    func fetchIssues(for repositoryName: Observable<String>) -> Driver<[String]>
+protocol IssueTrackerViewModelType {
+    var issues: Driver<[DisplayedIssue]> {get}
+    var isLoading: Driver<Bool> {get}
+    var issueTracker: IssueTracker {get}
 }
 
-class IssueTrackerViewModelImpl: IssueTrackerViewModel {
-    private var issues: [Issue] = []
+class IssueTrackerViewModel: IssueTrackerViewModelType {
+    var issues: Driver<[DisplayedIssue]>
+    var isLoading: Driver<Bool>
+    var issueTracker: IssueTracker
     
-    func fetchIssues(for repositoryName: Observable<String>) -> Driver<[String]> {
-        return IssueTracker().trackIssues(for: repositoryName).flatMap { (issues: [Issue]) -> Observable<[String]> in
-            self.issues = issues
-            return Observable.just(issues.map { $0.title })
-        }.asDriver(onErrorJustReturn: [])
+    init(with repositoryName: Observable<String>) {
+        issueTracker = IssueTracker()
+        
+        issues = issueTracker.trackIssues(for: repositoryName).flatMap({ (issues) -> Observable<[DisplayedIssue]> in
+            Observable<[DisplayedIssue]>.just(issues.map { DisplayedIssue(cellText:$0.title) })
+        }).asDriver(onErrorJustReturn: [])
+        
+        isLoading = issueTracker.isLoading.asDriver()
     }
 }

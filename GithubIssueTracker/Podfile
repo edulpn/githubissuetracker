@@ -9,8 +9,7 @@ target 'GithubIssueTracker' do
   pod 'Moya-ModelMapper/RxSwift', '~> 4.0.0'
   pod 'RxOptional'
   pod 'R.swift'
-  pod 'Swinject', '2.0.0'
-  pod 'SwinjectStoryboard', '1.0.0'
+  pod "RxSwiftUtilities"
 
   target 'GithubIssueTrackerTests' do
     inherit! :search_paths

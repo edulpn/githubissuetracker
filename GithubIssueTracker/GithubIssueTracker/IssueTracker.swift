@@ -14,30 +14,37 @@ import RxOptional
 
 struct IssueTracker {
     let provider = RxMoyaProvider<Github>()
+    let isLoading: Variable<Bool> = Variable<Bool>(false)
     
     func trackIssues(for repositoryName: Observable<String>) -> Observable<[Issue]> {
         return repositoryName
             .observeOn(MainScheduler.instance)
             .flatMapLatest { (name: String) -> Observable<Repository?> in
                 if name == "" { return Observable.just(nil) }
+                self.isLoading.value = true
                 
-                print("Repo Name: \(name)")
                 return self.findRepository(named: name)
             }
             .flatMapLatest { repository -> Observable<[Issue]?> in
                 guard let repository = repository else { return Observable.just(nil) }
                 
-                print("Repository: \(repository.fullName)")
                 return self.findIssues(for: repository)
             }
+            .do(onNext: { _ in
+                self.isLoading.value = false
+            })
             .replaceNilWith([])
     }
     
-    func findIssues(for repository: Repository) -> Observable<[Issue]?> {
-        return provider.request(Github.issues(repositoryFullName: repository.fullName)).debug().mapArrayOptional(type: Issue.self)
+    fileprivate func findIssues(for repository: Repository) -> Observable<[Issue]?> {
+        return provider.request(Github.issues(repositoryFullName: repository.fullName))
+            .debug()
+            .mapArrayOptional(type: Issue.self)
     }
     
-    func findRepository(named name: String) -> Observable<Repository?> {
-        return provider.request(Github.repo(fullName: name)).debug().mapObjectOptional(type: Repository.self)
+    fileprivate func findRepository(named name: String) -> Observable<Repository?> {
+        return provider.request(Github.repo(fullName: name))
+            .debug()
+            .mapObjectOptional(type: Repository.self)
     }
 }
