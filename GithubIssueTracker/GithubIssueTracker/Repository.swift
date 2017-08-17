@@ -13,10 +13,12 @@ struct Repository: Mappable {
     let id: Int
     let name: String
     let fullName: String
+    let url: String
     
     init(map: Mapper) throws {
         try id = map.from("id")
         try name = map.from("name")
         try fullName = map.from("full_name")
+        try url = map.from("url")
     }
 }

@@ -36,23 +36,32 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 2 nibs.
   struct nib {
     /// Nib `IssueTableViewCell`.
     static let issueTableViewCell = _R.nib._IssueTableViewCell()
+    /// Nib `RepositoryTableViewCell`.
+    static let repositoryTableViewCell = _R.nib._RepositoryTableViewCell()
     
     /// `UINib(name: "IssueTableViewCell", in: bundle)`
     static func issueTableViewCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.issueTableViewCell)
     }
     
+    /// `UINib(name: "RepositoryTableViewCell", in: bundle)`
+    static func repositoryTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.repositoryTableViewCell)
+    }
+    
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 2 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `issueTableViewCellIdentifier`.
     static let issueTableViewCellIdentifier: Rswift.ReuseIdentifier<IssueTableViewCell> = Rswift.ReuseIdentifier(identifier: "issueTableViewCellIdentifier")
+    /// Reuse identifier `repositoryTableViewCell`.
+    static let repositoryTableViewCell: Rswift.ReuseIdentifier<RepositoryTableViewCell> = Rswift.ReuseIdentifier(identifier: "repositoryTableViewCell")
     
     fileprivate init() {}
   }
@@ -120,6 +129,20 @@ struct _R: Rswift.Validatable {
       fileprivate init() {}
     }
     
+    struct _RepositoryTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = RepositoryTableViewCell
+      
+      let bundle = R.hostingBundle
+      let identifier = "repositoryTableViewCell"
+      let name = "RepositoryTableViewCell"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> RepositoryTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? RepositoryTableViewCell
+      }
+      
+      fileprivate init() {}
+    }
+    
     fileprivate init() {}
   }
   
@@ -141,15 +164,27 @@ struct _R: Rswift.Validatable {
       typealias InitialController = UIKit.UINavigationController
       
       let bundle = R.hostingBundle
+      let issueTrackerViewController = StoryboardViewControllerResource<IssueTrackerViewController>(identifier: "issueTrackerViewController")
       let name = "Main"
-      let repositorySearchViewController = StoryboardViewControllerResource<IssueTrackerViewController>(identifier: "repositorySearchViewController")
+      let repositoriesViewController = StoryboardViewControllerResource<RepositoriesViewController>(identifier: "repositoriesViewController")
+      let tabBarViewController = StoryboardViewControllerResource<UIKit.UITabBarController>(identifier: "tabBarViewController")
       
-      func repositorySearchViewController(_: Void = ()) -> IssueTrackerViewController? {
-        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: repositorySearchViewController)
+      func issueTrackerViewController(_: Void = ()) -> IssueTrackerViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: issueTrackerViewController)
+      }
+      
+      func repositoriesViewController(_: Void = ()) -> RepositoriesViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: repositoriesViewController)
+      }
+      
+      func tabBarViewController(_: Void = ()) -> UIKit.UITabBarController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: tabBarViewController)
       }
       
       static func validate() throws {
-        if _R.storyboard.main().repositorySearchViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'repositorySearchViewController' could not be loaded from storyboard 'Main' as 'IssueTrackerViewController'.") }
+        if _R.storyboard.main().tabBarViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'tabBarViewController' could not be loaded from storyboard 'Main' as 'UIKit.UITabBarController'.") }
+        if _R.storyboard.main().issueTrackerViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'issueTrackerViewController' could not be loaded from storyboard 'Main' as 'IssueTrackerViewController'.") }
+        if _R.storyboard.main().repositoriesViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'repositoriesViewController' could not be loaded from storyboard 'Main' as 'RepositoriesViewController'.") }
       }
       
       fileprivate init() {}

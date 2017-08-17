@@ -10,6 +10,7 @@ target 'GithubIssueTracker' do
   pod 'RxOptional'
   pod 'R.swift'
   pod "RxSwiftUtilities"
+  pod 'SnapKit', '~> 3.2.0'
 
   target 'GithubIssueTrackerTests' do
     inherit! :search_paths

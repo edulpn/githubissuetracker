@@ -12,6 +12,7 @@ import Moya
 enum Github {
     case repo(fullName: String)
     case issues(repositoryFullName: String)
+    case repos(username: String)
 }
 
 extension Github: TargetType {
@@ -23,6 +24,8 @@ extension Github: TargetType {
             return "/repos/\(name)"
         case .issues(let repositoryName):
             return "/repos/\(repositoryName)/issues"
+        case .repos(let name):
+            return "/users/\(name.URLEscapedString)/repos"
         }
     }
     
@@ -40,6 +43,8 @@ extension Github: TargetType {
             return "{\"id\": \"1\", \"language\": \"Swift\", \"url\": \"https://api.github.com/repos/edulpn/githubissuetracker\", \"name\": \"Router\"}".data(using: .utf8)!
         case .issues(_):
             return "{\"id\": 1, \"number\": 123, \"title\": \"Update all the documentation\", \"body\": \"Documentation is non-existant. Please stop being lazy.\"}".data(using: .utf8)!
+        case .repos(_):
+            return "{{\"id\": \"1\", \"language\": \"Swift\", \"url\": \"https://api.github.com/repos/edulpn/githubissuetracker\", \"name\": \"GithubIssueTracker\"}}}".data(using: .utf8)!
         }
     }
     

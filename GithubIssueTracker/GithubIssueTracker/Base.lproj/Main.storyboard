@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="kuT-4g-oex">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="97c-RZ-wJD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,26 +9,87 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="kNd-FV-BVk">
+        <!--Item-->
+        <scene sceneID="3cB-J4-gcU">
             <objects>
-                <navigationController id="kuT-4g-oex" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UlN-Np-pTW">
+                <viewController storyboardIdentifier="repositoriesViewController" id="ih0-y1-QWa" customClass="RepositoriesViewController" customModule="GithubIssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZOY-bC-nnh"/>
+                        <viewControllerLayoutGuide type="bottom" id="HKd-ui-mZh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zEq-if-310">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dYV-Pw-QA0">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KJ5-oW-s3b">
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HKd-ui-mZh" firstAttribute="top" secondItem="KJ5-oW-s3b" secondAttribute="bottom" id="2r0-kc-b8r"/>
+                            <constraint firstItem="KJ5-oW-s3b" firstAttribute="top" secondItem="dYV-Pw-QA0" secondAttribute="bottom" id="9cw-J7-OiJ"/>
+                            <constraint firstItem="KJ5-oW-s3b" firstAttribute="leading" secondItem="zEq-if-310" secondAttribute="leading" id="BAf-Sl-Chl"/>
+                            <constraint firstItem="dYV-Pw-QA0" firstAttribute="top" secondItem="ZOY-bC-nnh" secondAttribute="bottom" id="CiX-2z-Awx"/>
+                            <constraint firstAttribute="trailing" secondItem="dYV-Pw-QA0" secondAttribute="trailing" id="JVs-i9-Wzj"/>
+                            <constraint firstAttribute="trailing" secondItem="KJ5-oW-s3b" secondAttribute="trailing" id="WRU-uX-IUD"/>
+                            <constraint firstItem="dYV-Pw-QA0" firstAttribute="leading" secondItem="zEq-if-310" secondAttribute="leading" id="bqh-1w-1FZ"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="dIP-Bi-gCx"/>
+                    <connections>
+                        <outlet property="resultsTableView" destination="KJ5-oW-s3b" id="zsf-Kk-BOR"/>
+                        <outlet property="searchBar" destination="dYV-Pw-QA0" id="mfE-51-MCD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bLe-1D-P4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="606" y="-734"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7Ef-gw-GA3">
+            <objects>
+                <navigationController id="97c-RZ-wJD" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xh8-YC-Kjy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Zuo-p6-F1e" kind="relationship" relationship="rootViewController" id="7Er-KM-JDk"/>
+                        <segue destination="BBa-6z-TaQ" kind="relationship" relationship="rootViewController" id="BMN-Ef-zqr"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bxx-xa-sIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oeg-2k-8bL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-390" y="78"/>
+            <point key="canvasLocation" x="-516" y="78"/>
         </scene>
-        <!--GithubIssueTracker-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="EIO-Nb-fx6">
+            <objects>
+                <tabBarController storyboardIdentifier="tabBarViewController" id="BBa-6z-TaQ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="35M-fG-bpB"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="lg3-il-fNX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ih0-y1-QWa" kind="relationship" relationship="viewControllers" id="KEt-UE-9hV"/>
+                        <segue destination="Zuo-p6-F1e" kind="relationship" relationship="viewControllers" id="URH-fH-zD5"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0MA-Hk-VWL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="606" y="78"/>
+        </scene>
+        <!--Item-->
         <scene sceneID="Dtd-vj-2NU">
             <objects>
-                <viewController storyboardIdentifier="repositorySearchViewController" id="Zuo-p6-F1e" customClass="IssueTrackerViewController" customModule="GithubIssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="issueTrackerViewController" id="Zuo-p6-F1e" customClass="IssueTrackerViewController" customModule="GithubIssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6JY-w1-RTE"/>
                         <viewControllerLayoutGuide type="bottom" id="kkO-nT-VsK"/>
@@ -42,48 +103,30 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mBV-tQ-rR4">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDN-4i-dns">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="O6h-Wa-eL4">
-                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="O6h-Wa-eL4" firstAttribute="centerY" secondItem="tDN-4i-dns" secondAttribute="centerY" id="DnT-vs-jvI"/>
-                                    <constraint firstItem="O6h-Wa-eL4" firstAttribute="centerX" secondItem="tDN-4i-dns" secondAttribute="centerX" id="uns-wi-dWD"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mBV-tQ-rR4" firstAttribute="top" secondItem="pJY-J3-Yj3" secondAttribute="bottom" id="7fJ-KT-qV7"/>
                             <constraint firstAttribute="trailing" secondItem="pJY-J3-Yj3" secondAttribute="trailing" id="8pM-1n-584"/>
-                            <constraint firstItem="tDN-4i-dns" firstAttribute="top" secondItem="7lT-f7-LIZ" secondAttribute="top" id="8yy-AP-lIF"/>
                             <constraint firstAttribute="trailing" secondItem="mBV-tQ-rR4" secondAttribute="trailing" id="DY4-80-MmA"/>
-                            <constraint firstAttribute="bottom" secondItem="tDN-4i-dns" secondAttribute="bottom" id="FwN-f0-0yp"/>
                             <constraint firstItem="kkO-nT-VsK" firstAttribute="top" secondItem="mBV-tQ-rR4" secondAttribute="bottom" id="YGW-ml-l1e"/>
-                            <constraint firstAttribute="trailing" secondItem="tDN-4i-dns" secondAttribute="trailing" id="cm0-8t-ICT"/>
                             <constraint firstItem="mBV-tQ-rR4" firstAttribute="leading" secondItem="7lT-f7-LIZ" secondAttribute="leading" id="oCp-iD-vtH"/>
                             <constraint firstItem="pJY-J3-Yj3" firstAttribute="leading" secondItem="7lT-f7-LIZ" secondAttribute="leading" id="oq3-8g-drf"/>
-                            <constraint firstItem="tDN-4i-dns" firstAttribute="leading" secondItem="7lT-f7-LIZ" secondAttribute="leading" id="s2e-pu-tYy"/>
                             <constraint firstItem="pJY-J3-Yj3" firstAttribute="top" secondItem="6JY-w1-RTE" secondAttribute="bottom" id="yws-NX-He3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="GithubIssueTracker" id="hgl-Iv-esS"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="Em3-1B-ct7"/>
                     <connections>
-                        <outlet property="loadingView" destination="tDN-4i-dns" id="iOg-sh-uKp"/>
                         <outlet property="searchBar" destination="pJY-J3-Yj3" id="rHG-xu-m0S"/>
                         <outlet property="tableView" destination="mBV-tQ-rR4" id="rmo-ht-Pxt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIl-hB-3D7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="513" y="78"/>
+            <point key="canvasLocation" x="1566" y="78"/>
         </scene>
     </scenes>
 </document>
